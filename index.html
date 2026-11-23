@@ -65,7 +65,7 @@ body{background:#f5f5f5}
     <button class="btn" onclick="joinDone()">Join అవ్వండి - ఉచితం</button>
     <p class="small" id="joinMsg" style="color:green;font-weight:bold;margin-top:10px"></p>
   </div>
-  <div class="box"><h3>📲 యాప్ లాగా Install చేసుకోండి</h3><p class="small">Chrome లో పైన ⋮ > Add to Home Screen నొక్కండి. కింద STEP 2, 3 లో ఫైల్స్ పెట్టాకే Install ఆప్షన్ వస్తుంది.</p><br><button class="btn" onclick="installApp()">📲 ఇప్పుడే Install చేయండి</button></div>
+  <div class="box"><h3>📲 యాప్ లాగా Install చేసుకోండి</h3><p class="small">Chrome లో పైన ⋮ > Add to Home Screen నొక్కండి.</p><br><button class="btn" onclick="installApp()">📲 ఇప్పుడే Install చేయండి</button></div>
 </div>
 
 <div class="bottom">
@@ -79,7 +79,7 @@ let deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
 function installApp(){
   if(deferredPrompt){deferredPrompt.prompt();}
-  else{alert('Install చేయడానికి:\nChrome లో పైన ⋮ మెనూ > Add to Home Screen / Install App నొక్కండి.\n\nఅది రాకపోతే manifest.json + sw.js ఫైల్స్ ఇంకా పెట్టలేదని అర్థం.');}
+  else{alert('Install చేయడానికి:\nChrome లో పైన ⋮ మెనూ > Add to Home Screen / Install App నొక్కండి.');}
 }
 function show(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -91,7 +91,6 @@ function joinDone(){ let n=document.getElementById('jName').value; document.getE
 
 const imgs=['https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800','https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800','https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800','https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800','https://images.unsplash.com/photo-1439066615861-d1af177d7c9c?w=800','https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800'];
 
-// ✅ ఇక్కడే ఫిక్స్ - ముందు వెంటనే చూపించే వార్తలు, ఖాళీగా ఉండదు
 let liveNews=[
  {title:'హైదరాబాద్ లో నేడు వాతావరణం - పలు ప్రాంతాల్లో తేలికపాటి వర్షం',link:'https://news.google.com/search?q=Hyderabad%20weather&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[0],cat:'Hyderabad'},
  {title:'విజయవాడలో ట్రాఫిక్, రోడ్ పనులు - ప్రయాణికులకు సూచన',link:'https://news.google.com/search?q=Vijayawada&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[1],cat:'Vijayawada'},
@@ -103,8 +102,9 @@ let liveNews=[
  {title:'అమరావతిలో రాజధాని పనులు వేగవంతం',link:'https://news.google.com/search?q=Amaravati&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[3],cat:'Andhra Pradesh'},
 ];
 let currentCat='All';
-function getCat(t){ t=t.toLowerCase(); if(t.includes('hyderabad')||t.includes('హైదరాబాద్')) return 'Hyderabad'; if(t.includes('vijayawada')||t.includes('విజయవాడ')) return 'Vijayawada'; if(t.includes('andhra')||t.includes('ఆంధ్ర')||t.includes('amaravati')) return 'Andhra Pradesh'; return 'Telangana'; }
+function getCat(t){ t=t.toLowerCase(); if(t.includes('hyderabad')||t.includes('హైదరాబాద్')) return 'Hyderabad'; if(t.includes('vijayawada')||t.includes('విజయవాడ')) return 'Vijayawada'; if(t.includes('andhra')||t.includes('ఆంధ్ర')||t.includes('amaravati')||t.includes('guntur')||t.includes('visakhapatnam')) return 'Andhra Pradesh'; return 'Telangana'; }
 function timeAgo(d){ try{ let diff=(Date.now()-new Date(d).getTime())/1000/60; if(diff<60) return Math.max(1,Math.round(diff))+' నిమిషాల క్రితం'; if(diff<1440) return Math.round(diff/60)+' గంటల క్రితం'; return Math.round(diff/1440)+' రోజుల క్రితం'; }catch(e){ return 'ఇప్పుడే'; } }
+
 function renderNews(){
   let list = currentCat==='All' ? liveNews : liveNews.filter(n=>n.cat===currentCat);
   if(list.length===0) list=liveNews;
@@ -120,23 +120,50 @@ function filterNews(cat,btn){
   loadLiveNews(false);
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+// ✅ కొత్త ఫిక్స్ - పాత క్యాష్ రాకుండా ప్రతిసారి కొత్త లింక్ + 2 సర్వర్లు
 async function loadLiveNews(isRefresh){
   if(isRefresh) document.getElementById('updateTime').innerText='కొత్త వార్తల కోసం చూస్తున్నాం...';
-  let q = currentCat==='All' ? 'Telangana OR Andhra Pradesh OR Hyderabad' : currentCat;
+  let q = currentCat==='All' ? 'Telangana OR Andhra Pradesh OR Hyderabad OR Vijayawada' : currentCat;
   let rss='https://news.google.com/rss/search?q='+encodeURIComponent(q)+'&hl=te&gl=IN&ceid=IN:te';
-  let controller=new AbortController(); setTimeout(()=>controller.abort(), 6000);
+  let bust = '&_t=' + Date.now() + '&_r=' + Math.random();
+
+  // 1 - rss2json (క్యాష్ లేకుండా)
   try{
-    let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss),{signal:controller.signal});
+    let c1=new AbortController(); setTimeout(()=>c1.abort(), 7000);
+    let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss)+bust,{signal:c1.signal, cache:'no-store'});
     let d=await r.json();
     if(d && d.items && d.items.length>2){
       liveNews=d.items.slice(0,15).map((it,i)=>({title:it.title.split(' - ').slice(0,-1).join(' - ')||it.title, link:it.link, src:(it.author||'Google News')+' • '+timeAgo(it.pubDate), img:imgs[i%imgs.length], cat:getCat(it.title)}));
-      document.getElementById('updateTime').innerText='చివరిగా అప్డేట్: '+new Date().toLocaleTimeString('te-IN')+' - లైవ్ వార్తలు వచ్చాయి ✅';
-      renderNews();
+      document.getElementById('updateTime').innerText='చివరిగా అప్డేట్: '+new Date().toLocaleTimeString('te-IN')+' - కొత్త లైవ్ వార్తలు ✅';
+      renderNews(); return;
     }
-  }catch(e){ if(isRefresh) document.getElementById('updateTime').innerText='లైవ్ సర్వర్ బిజీగా ఉంది, పాత వార్తలు చూపిస్తున్నాం.'; }
+  }catch(e){}
+
+  // 2 - allorigins నేరుగా (ఎప్పుడూ ఫ్రెష్)
+  try{
+    let c2=new AbortController(); setTimeout(()=>c2.abort(), 7000);
+    let r2=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(rss+bust),{signal:c2.signal, cache:'no-store'});
+    let txt=await r2.text();
+    let doc=new DOMParser().parseFromString(txt,'text/xml');
+    let items=[...doc.querySelectorAll('item')].slice(0,15);
+    if(items.length>2){
+      liveNews=items.map((it,i)=>{
+        let title=it.querySelector('title')?.textContent||'';
+        let link=it.querySelector('link')?.textContent||'#';
+        let pub=it.querySelector('pubDate')?.textContent||'';
+        return {title:title.split(' - ').slice(0,-1).join(' - ')||title, link, src:'Google News • '+timeAgo(pub), img:imgs[i%imgs.length], cat:getCat(title)};
+      });
+      document.getElementById('updateTime').innerText='చివరిగా అప్డేట్: '+new Date().toLocaleTimeString('te-IN')+' - కొత్త లైవ్ వార్తలు ✅';
+      renderNews(); return;
+    }
+  }catch(e){}
+
+  if(isRefresh) document.getElementById('updateTime').innerText='లైవ్ సర్వర్ బిజీగా ఉంది, కొంచెం ఆగి మళ్ళీ Refresh నొక్కండి.';
 }
 renderNews();
 loadLiveNews(false);
+setInterval(()=>{loadLiveNews(false);},180000);
 if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 </script>
 </body>
