@@ -35,40 +35,28 @@ body{background:#f5f5f5}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <h1>APTS NEWS</h1>
-  <button class="installBtn" onclick="installApp()">📲 యాప్ Install</button>
-</div>
+<div class="header"><h1>APTS NEWS</h1><button class="installBtn" onclick="installApp()">📲 యాప్ Install</button></div>
 
 <div id="home" class="page active">
-  <div class="tabs" id="tabs">
+  <div class="tabs">
     <button class="active" onclick="filterNews('All',this)">అన్నీ • All</button>
     <button onclick="filterNews('Hyderabad',this)">Hyderabad</button>
     <button onclick="filterNews('Vijayawada',this)">Vijayawada</button>
     <button onclick="filterNews('Telangana',this)">Telangana</button>
     <button onclick="filterNews('Andhra Pradesh',this)">Andhra Pradesh</button>
   </div>
-
   <div class="breaking"><b>⚡ BREAKING NEWS</b><br><span id="breakingText">లైవ్ న్యూస్ లోడ్ అవుతుంది...</span></div>
-
   <div style="padding:0 10px;display:flex;justify-content:space-between;align-items:center">
-    <span><span class="badge">● LIVE • Google News నుంచి</span> <span class="small" id="countText"></span></span>
+    <span><span class="badge">● LIVE</span> <span class="small" id="countText"></span></span>
     <button class="refreshBtn" onclick="loadLiveNews(true)">🔄 కొత్త వార్తలు</button>
   </div>
   <p class="small" style="padding:5px 10px" id="updateTime">కొత్త వార్తల కోసం చూస్తున్నాం...</p>
-
-  <div id="newsList"><div class="loading">⏳ కొత్త వార్తలు వస్తున్నాయి, 5 సెకన్లు ఆగండి...</div></div>
-
-  <div class="box" style="text-align:center">
-    <h3>మీ ఊరి వార్త మీరే పంపండి</h3>
-    <p class="small">మీ చుట్టూ జరిగిన వార్త ఉంటే మాకు పంపండి. మా టీం చెక్ చేసి పబ్లిష్ చేస్తుంది.</p><br>
-    <button class="btn" onclick="show('join',document.querySelectorAll('.bottom button')[1])">📝 వార్త పంపండి / Join</button>
-  </div>
+  <div id="newsList"><div class="loading">⏳ కొత్త వార్తలు వస్తున్నాయి, 10 సెకన్లు ఆగండి...</div></div>
+  <div class="box" style="text-align:center"><h3>మీ ఊరి వార్త మీరే పంపండి</h3><p class="small">మీ చుట్టూ జరిగిన వార్త ఉంటే మాకు పంపండి.</p><br><button class="btn" onclick="show('join',document.querySelectorAll('.bottom button')[1])">📝 వార్త పంపండి / Join</button></div>
 </div>
 
 <div id="join" class="page">
-  <div class="box"><h3>APTS NEWS లో చేరండి</h3><p class="small">మీ ఊరి రిపోర్టర్ అవ్వండి. ఉచితం. Admin Verified తర్వాతనే Active అవుతారు.</p>
+  <div class="box"><h3>APTS NEWS లో చేరండి</h3><p class="small">మీ ఊరి రిపోర్టర్ అవ్వండి. ఉచితం.</p>
     <input class="input" id="jName" placeholder="పూర్తి పేరు / Full Name">
     <input class="input" id="jPhone" placeholder="ఫోన్ నంబర్">
     <input class="input" id="jDist" placeholder="జిల్లా / District">
@@ -76,7 +64,7 @@ body{background:#f5f5f5}
     <button class="btn" onclick="joinDone()">Join అవ్వండి - ఉచితం</button>
     <p class="small" id="joinMsg" style="color:green;font-weight:bold;margin-top:10px"></p>
   </div>
-  <div class="box"><h3>📲 యాప్ లాగా Install చేసుకోండి</h3><p class="small">పైన Install బటన్ నొక్కండి > Add to Home Screen నొక్కండి. మీ ఫోన్ లో యాప్ లాగా వస్తుంది.</p><br><button class="btn" onclick="installApp()">📲 ఇప్పుడే Install చేయండి</button></div>
+  <div class="box"><h3>📲 యాప్ లాగా Install చేసుకోండి</h3><p class="small">పైన Install బటన్ నొక్కండి > Add to Home Screen నొక్కండి.</p><br><button class="btn" onclick="installApp()">📲 ఇప్పుడే Install చేయండి</button></div>
 </div>
 
 <div class="bottom">
@@ -101,84 +89,107 @@ function show(id,btn){
 function joinDone(){
   let n=document.getElementById('jName').value;
   document.getElementById('joinMsg').innerText='ధన్యవాదాలు '+(n||'అండీ')+'! మీ వివరాలు Admin కి వెళ్ళాయి.';
-  alert('Join విజయవంతం! Admin మీకు కాల్ చేస్తారు.');
+  alert('Join విజయవంతం!');
 }
 
-// LIVE NEWS - Google News RSS నుంచి
-let liveNews=[];
-let currentCat='All';
-const fallbackImgs=[
+let liveNews=[]; let currentCat='All';
+const imgs=[
  'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800',
  'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800',
  'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800',
- 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800'
+ 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800',
+ 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800',
+ 'https://images.unsplash.com/photo-1439066615861-d1af177d7c9c?w=800'
 ];
-function getCat(title){
-  let t=title.toLowerCase();
+function getCat(t){
+  t=t.toLowerCase();
   if(t.includes('hyderabad')||t.includes('హైదరాబాద్')) return 'Hyderabad';
-  if(t.includes('vijayawada')||t.includes('విజయవాడ')||t.includes('bezawada')) return 'Vijayawada';
-  if(t.includes('telangana')||t.includes('తెలంగాణ')||t.includes('warangal')||t.includes('nizamabad')) return 'Telangana';
+  if(t.includes('vijayawada')||t.includes('విజయవాడ')) return 'Vijayawada';
   if(t.includes('andhra')||t.includes('ఆంధ్ర')||t.includes('amaravati')||t.includes('guntur')||t.includes('visakhapatnam')) return 'Andhra Pradesh';
   return 'Telangana';
 }
-function timeAgo(pubDate){
+function timeAgo(d){
   try{
-    let d=new Date(pubDate); let diff=(Date.now()-d.getTime())/1000/60;
+    let diff=(Date.now()-new Date(d).getTime())/1000/60;
     if(diff<60) return Math.max(1,Math.round(diff))+' నిమిషాల క్రితం';
     if(diff<1440) return Math.round(diff/60)+' గంటల క్రితం';
     return Math.round(diff/1440)+' రోజుల క్రితం';
   }catch(e){return 'ఇప్పుడే';}
 }
+function parseRSSXML(xmlText){
+  let doc=new DOMParser().parseFromString(xmlText,'text/xml');
+  let items=[...doc.querySelectorAll('item')].slice(0,20);
+  return items.map((it,i)=>{
+    let title=it.querySelector('title')?.textContent||'';
+    let link=it.querySelector('link')?.textContent||'#';
+    let pub=it.querySelector('pubDate')?.textContent||'';
+    let desc=it.querySelector('description')?.textContent||'';
+    let m=desc.match(/https?:\/\/[^'"\s]+\.(jpg|jpeg|png|webp)/i);
+    return {title:title.split(' - ').slice(0,-1).join(' - ')||title, link, src:'Google News • '+timeAgo(pub), img:m?m[0]:imgs[i%imgs.length], cat:getCat(title)};
+  });
+}
 async function loadLiveNews(isRefresh){
   if(isRefresh) document.getElementById('newsList').innerHTML='<div class="loading">⏳ కొత్త వార్తలు వస్తున్నాయి...</div>';
-  let query = currentCat==='All' ? 'Telangana OR Andhra Pradesh OR Hyderabad OR Vijayawada' : currentCat;
-  let rss = 'https://news.google.com/rss/search?q='+encodeURIComponent(query)+'&hl=te&gl=IN&ceid=IN:te';
-  let api = 'https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss);
+  let q = currentCat==='All' ? 'Telangana OR Andhra Pradesh OR Hyderabad OR Vijayawada' : currentCat;
+  let rss='https://news.google.com/rss/search?q='+encodeURIComponent(q)+'&hl=te&gl=IN&ceid=IN:te';
+  let tried=false;
+
+  // 1వ ప్రయత్నం - rss2json
   try{
-    let res = await fetch(api);
-    let data = await res.json();
-    if(data && data.items && data.items.length>0){
-      liveNews = data.items.slice(0,20).map((it,i)=>({
-        title: it.title.split(' - ').slice(0,-1).join(' - ') || it.title,
-        link: it.link,
-        src: (it.author||'Google News')+' • '+timeAgo(it.pubDate),
-        img: fallbackImgs[i%fallbackImgs.length],
-        cat: getCat(it.title)
-      }));
-      document.getElementById('breakingText').innerText = liveNews[0].title;
-      document.getElementById('updateTime').innerText = 'చివరిగా అప్డేట్: '+new Date().toLocaleTimeString('te-IN')+' - ప్రతిసారీ ఓపెన్ చేసినప్పుడు కొత్త వార్తలు వస్తాయి';
-      renderNews();
-      return;
+    let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss));
+    let d=await r.json();
+    if(d && d.items && d.items.length>2){
+      liveNews=d.items.slice(0,20).map((it,i)=>({title:it.title.split(' - ').slice(0,-1).join(' - ')||it.title, link:it.link, src:(it.author||'Google News')+' • '+timeAgo(it.pubDate), img:imgs[i%imgs.length], cat:getCat(it.title)}));
+      tried=true;
     }
   }catch(e){}
-  // ఇంటర్నెట్ / API ఆగితే పాత వార్తలు చూపిస్తుంది
-  if(liveNews.length===0){
-    liveNews=[{title:'హైదరాబాద్ లో భారీ వర్షం - ట్రాఫిక్ అలర్ట్',link:'#',src:'APTS NEWS • ఇప్పుడే',img:fallbackImgs[0],cat:'Hyderabad'}];
+
+  // 2వ ప్రయత్నం - allorigins ద్వారా Google News RSS నేరుగా
+  if(!tried){
+    try{
+      let r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(rss));
+      let txt=await r.text();
+      let parsed=parseRSSXML(txt);
+      if(parsed.length>2){ liveNews=parsed; tried=true; }
+    }catch(e){}
+  }
+
+  // 3వ ప్రయత్నం - Eenadu RSS
+  if(!tried){
+    try{
+      let r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent('https://www.eenadu.net/feed'));
+      let txt=await r.text();
+      let parsed=parseRSSXML(txt);
+      if(parsed.length>2){ liveNews=parsed; tried=true; }
+    }catch(e){}
+  }
+
+  if(tried){
+    document.getElementById('breakingText').innerText=liveNews[0].title;
+    document.getElementById('updateTime').innerText='చివరిగా అప్డేట్: '+new Date().toLocaleTimeString('te-IN')+' - లైవ్ వార్తలు వచ్చాయి ✅';
+  } else {
+    document.getElementById('updateTime').innerText='⚠️ లైవ్ సర్వర్ బిజీగా ఉంది, కొంచెం తర్వాత మళ్ళీ Refresh నొక్కండి. కింద పాత వార్తలు ఉన్నాయి.';
+    if(liveNews.length===0) liveNews=[{title:'హైదరాబాద్ లో భారీ వర్షం - ట్రాఫిక్ అలర్ట్',link:'#',src:'APTS NEWS • ఇప్పుడే',img:imgs[0],cat:'Hyderabad'}];
   }
   renderNews();
 }
 function renderNews(){
-  document.getElementById('countText').innerText = liveNews.length+' వార్తలు';
-  document.getElementById('newsList').innerHTML = liveNews.map(n=>`
+  document.getElementById('countText').innerText=liveNews.length+' వార్తలు';
+  document.getElementById('newsList').innerHTML=liveNews.map(n=>`
     <div class="card">
-      <img src="${n.img}" onerror="this.src='${fallbackImgs[0]}'">
-      <div class="card-body">
-        <h3>${n.title}</h3>
-        <div class="source">Source: ${n.src} • ${n.cat}</div>
-        <button class="btn" onclick="window.open('${n.link}','_blank')">పూర్తి వార్త చదవండి →</button>
-      </div>
+      <img src="${n.img}" onerror="this.src='${imgs[0]}'">
+      <div class="card-body"><h3>${n.title}</h3><div class="source">Source: ${n.src} • ${n.cat}</div><button class="btn" onclick="window.open('${n.link}','_blank')">పూర్తి వార్త చదవండి →</button></div>
     </div>`).join('');
 }
 function filterNews(cat,btn){
   currentCat=cat;
-  document.querySelectorAll('#tabs button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   loadLiveNews(true);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 loadLiveNews(false);
-// ప్రతి 5 నిమిషాలకి ఆటోమేటిక్ గా కొత్త వార్తలు
-setInterval(()=>{ loadLiveNews(false); }, 300000);
+setInterval(()=>{loadLiveNews(false);},300000);
 </script>
 </body>
 </html>
