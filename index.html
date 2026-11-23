@@ -4,101 +4,146 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APTS NEWS - తెలంగాణ & AP న్యూస్</title>
+<meta name="theme-color" content="#d32f2f">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 body{background:#f5f5f5}
-.header{background:#d32f2f;color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center}
-.header h1{font-size:20px}
-.tabs{display:flex;gap:8px;padding:10px;overflow-x:auto;background:#fff}
+.header{background:#d32f2f;color:#fff;padding:14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.header h1{font-size:21px;letter-spacing:1px}
+.installBtn{background:#fff;color:#d32f2f;border:none;padding:7px 12px;border-radius:20px;font-weight:bold;font-size:13px;cursor:pointer}
+.tabs{display:flex;gap:8px;padding:10px;overflow-x:auto;background:#fff;position:sticky;top:52px;z-index:9}
 .tabs button{padding:8px 14px;border:1px solid #d32f2f;background:#fff;color:#d32f2f;border-radius:20px;white-space:nowrap;cursor:pointer}
 .tabs button.active{background:#d32f2f;color:#fff}
-.breaking{background:#ffebee;border-left:4px solid #d32f2f;margin:10px;padding:12px}
-.card{background:#fff;margin:10px;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px #ccc}
+.breaking{background:#ffebee;border-left:4px solid #d32f2f;margin:10px;padding:12px;border-radius:6px}
+.card{background:#fff;margin:10px;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px #ccc}
 .card img{width:100%;height:180px;object-fit:cover}
 .card-body{padding:12px}
-.card-body h3{font-size:17px;margin-bottom:6px}
+.card-body h3{font-size:17px;margin-bottom:6px;line-height:1.4}
 .source{font-size:13px;color:#666;margin-bottom:8px}
-.btn{background:#d32f2f;color:#fff;border:none;padding:10px 16px;border-radius:6px;width:100%;cursor:pointer}
-.page{display:none;padding-bottom:70px}
+.btn{background:#d32f2f;color:#fff;border:none;padding:11px 16px;border-radius:8px;width:100%;cursor:pointer;font-size:15px}
+.page{display:none;padding-bottom:80px}
 .page.active{display:block}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px;border-top:1px solid #ddd}
-.bottom button{border:none;background:none;font-size:14px;cursor:pointer}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px;border-top:1px solid #ddd}
+.bottom button{border:none;background:none;font-size:15px;cursor:pointer}
 .bottom button.active{color:#d32f2f;font-weight:bold}
-.input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
-.box{background:#fff;margin:10px;padding:15px;border-radius:10px}
-.earn{display:flex;gap:10px}
-.earn div{flex:1;background:#fff3e0;padding:12px;border-radius:8px;text-align:center}
-.lock{background:#fff3cd;padding:12px;margin:10px;border-radius:8px;font-size:13px}
+.input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;font-size:15px}
+.box{background:#fff;margin:10px;padding:16px;border-radius:12px}
+.small{font-size:13px;color:#666;line-height:1.5}
+.badge{background:#e8f5e9;color:#2e7d32;padding:3px 8px;border-radius:10px;font-size:12px}
 </style>
 </head>
 <body>
 
-<div class="header"><h1>APTS NEWS</h1><span>🔔 👤</span></div>
+<div class="header">
+  <h1>APTS NEWS</h1>
+  <button class="installBtn" onclick="installApp()">📲 యాప్ Install</button>
+</div>
 
-<!-- PAGE 1 : HOME -->
+<!-- HOME -->
 <div id="home" class="page active">
-  <div class="tabs">
-    <button class="active">Hyderabad</button><button>Vijayawada</button><button>Telangana</button><button>Andhra Pradesh</button>
+  <div class="tabs" id="tabs">
+    <button class="active" onclick="filterNews('All',this)">అన్నీ • All</button>
+    <button onclick="filterNews('Hyderabad',this)">Hyderabad</button>
+    <button onclick="filterNews('Vijayawada',this)">Vijayawada</button>
+    <button onclick="filterNews('Telangana',this)">Telangana</button>
+    <button onclick="filterNews('Andhra Pradesh',this)">Andhra Pradesh</button>
   </div>
-  <div class="breaking"><b>⚡ BREAKING NEWS</b><br>హైదరాబాద్ లో భారీ వర్షం - ట్రాఫిక్ అలర్ట్</div>
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800">
-    <div class="card-body">
-      <h3>హైదరాబాద్ లో కొత్త మెట్రో లైన్ ప్రారంభం</h3>
-      <div class="source">Source: Eenadu • 2 గంటల క్రితం • Kukatpally నుంచి - రామ్ కుమార్</div>
-      <button class="btn" onclick="alert('ఇక్కడ ఒరిజినల్ సైట్ లింక్ వస్తుంది')">పూర్తి వార్త చదవండి → Read Full News</button>
-    </div>
-  </div>
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800">
-    <div class="card-body">
-      <h3>విజయవాడలో రోడ్ విస్తరణ పనులు వేగంగా</h3>
-      <div class="source">Source: Sakshi • 5 గంటల క్రితం • Vijayawada నుంచి - సురేష్</div>
-      <button class="btn" onclick="alert('ఇక్కడ ఒరిజినల్ సైట్ లింక్ వస్తుంది')">పూర్తి వార్త చదవండి → Read Full News</button>
-    </div>
+
+  <div class="breaking"><b>⚡ BREAKING NEWS</b><br><span id="breakingText">హైదరాబాద్ లో భారీ వర్షం - ట్రాఫిక్ అలర్ట్, జాగ్రత్తగా ఉండండి</span></div>
+
+  <div style="padding:0 10px"><span class="badge">● LIVE • ఆటో అప్డేట్ అవుతుంది</span> <span class="small" id="countText"></span></div>
+
+  <div id="newsList"></div>
+
+  <div class="box" style="text-align:center">
+    <h3>మీ ఊరి వార్త మీరే పంపండి</h3>
+    <p class="small">మీ చుట్టూ జరిగిన వార్త, ఫోటో ఉంటే మాకు పంపండి. మా టీం చెక్ చేసి పబ్లిష్ చేస్తుంది.</p><br>
+    <button class="btn" onclick="show('join',document.querySelectorAll('.bottom button')[1])">📝 వార్త పంపండి / Join</button>
   </div>
 </div>
 
-<!-- PAGE 2 : EARNINGS - LOCKED -->
-<div id="earn" class="page">
-  <div class="box"><h3>జర్నలిస్ట్ ఎర్నింగ్స్</h3><p style="font-size:13px;color:#666">ఇది కేవలం జర్నలిస్ట్ కి, Admin కి మాత్రమే కనిపిస్తుంది</p></div>
-  <div class="lock">🔒 మీరు లాగిన్ అయితేనే మీ ఎర్నింగ్స్ కనిపిస్తాయి. వేరే వాళ్ళకి కనిపించవు.</div>
-  <div class="box"><b>Total Views:</b> 12,500 👁️</div>
-  <div class="earn">
-    <div><small>Total Earnings</small><h2>₹450</h2></div>
-    <div style="background:#e8f5e9"><small>మీ వాటా 30%</small><h2 style="color:green">₹135</h2></div>
-  </div>
-  <div class="box"><b>యాప్ వాటా 70%:</b> ₹315<br><small>Withdraw Min: ₹500 - ఇంకా ₹365 కావాలి</small><br><br><button class="btn">Withdraw - Min ₹500</button></div>
-</div>
-
-<!-- PAGE 3 : JOIN -->
+<!-- JOIN -->
 <div id="join" class="page">
-  <div class="box"><h3>జర్నలిస్ట్ గా చేరండి - Join</h3><p>Admin Verified తర్వాతనే Active అవుతారు</p>
-    <input class="input" placeholder="పూర్తి పేరు / Full Name">
-    <input class="input" placeholder="ఫోన్ నంబర్ + OTP">
-    <input class="input" placeholder="జిల్లా / District - Hyderabad">
-    <input class="input" placeholder="మండలం / Mandal - Kukatpally">
-    <input class="input" placeholder="పిన్ కోడ్ / Pincode - 500072">
-    <input class="input" placeholder="ఆధార్ ID ఫోటో అప్లోడ్">
-    <input class="input" placeholder="సెల్ఫీ ఫోటో అప్లోడ్">
-    <button class="btn">₹100 చెల్లించి Join అవ్వండి - Pay via UPI</button>
-    <p style="font-size:12px;margin-top:10px;color:#666">✓ మీ డీటెయిల్స్ కేవలం Admin కి మాత్రమే కనిపిస్తాయి. పబ్లిక్ కి కనిపించవు.</p>
+  <div class="box"><h3>APTS NEWS లో చేరండి</h3><p class="small">మీ ఊరి రిపోర్టర్ అవ్వండి. ఉచితం. Admin Verified తర్వాతనే Active అవుతారు.</p>
+    <input class="input" id="jName" placeholder="పూర్తి పేరు / Full Name">
+    <input class="input" id="jPhone" placeholder="ఫోన్ నంబర్">
+    <input class="input" id="jDist" placeholder="జిల్లా / District - ఉదా: Hyderabad">
+    <input class="input" id="jMandal" placeholder="మండలం / Mandal - ఉదా: Kukatpally">
+    <input class="input" id="jNews" placeholder="మీ ఊరి వార్త ఇక్కడ రాయండి...">
+    <button class="btn" onclick="joinDone()">Join అవ్వండి - ఉచితం</button>
+    <p class="small" style="margin-top:10px">✓ మీ డీటెయిల్స్ పబ్లిక్ కి కనిపించవు. కేవలం Admin కి మాత్రమే.</p>
+    <p class="small" id="joinMsg" style="color:green;font-weight:bold;margin-top:10px"></p>
   </div>
+  <div class="box"><h3>📲 యాప్ లాగా Install చేసుకోండి</h3><p class="small">1. పైన ఉన్న Install బటన్ నొక్కండి<br>2. Add to Home Screen / Install అని వస్తే OK నొక్కండి<br>3. మీ ఫోన్ లో APTS NEWS యాప్ లాగా వస్తుంది</p><br><button class="btn" onclick="installApp()">📲 ఇప్పుడే Install చేయండి</button></div>
 </div>
 
 <div class="bottom">
   <button class="active" onclick="show('home',this)">🏠 హోమ్</button>
-  <button onclick="show('earn',this)">💰 ఎర్నింగ్స్</button>
-  <button onclick="show('join',this)">📝 Join</button>
+  <button onclick="show('join',this)">📝 Join / వార్త పంపండి</button>
+  <button onclick="installApp()">📲 Install</button>
 </div>
 
 <script>
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e)=>{ e.preventDefault(); deferredPrompt=e; });
+function installApp(){
+  if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; }); }
+  else { alert('యాప్ Install చేయడానికి:\n\nChrome లో పైన ⋮ మెనూ > Add to Home Screen / Install App నొక్కండి.\nఅప్పుడు మీ ఫోన్ లో యాప్ లాగా వస్తుంది.'); }
+}
+
+// AUTO NEWS - ఎవరూ జాయిన్ అవ్వకపోయినా ఇవి ఆటోమేటిక్ గా వస్తాయి
+const allNews = [
+  {cat:'Hyderabad', title:'హైదరాబాద్ లో కొత్త మెట్రో లైన్ ప్రారంభం', img:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800', src:'【entity-Eenadu¦canonical_name=Eenadu】 • 2 గంటల క్రితం • Kukatpally'},
+  {cat:'Hyderabad', title:'హైదరాబాద్ లో భారీ వర్షం - పలు ప్రాంతాల్లో నీరు నిలిచింది', img:'https://images.unsplash.com/photo-1428592953211-077101b2021b?w=800', src:'APTS NEWS • 30 నిమిషాల క్రితం • Hyderabad'},
+  {cat:'Hyderabad', title:'హైదరాబాద్ లో ట్రాఫిక్ కు కొత్త రూల్స్ - జాగ్రత్తగా చదవండి', img:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800', src:'APTS NEWS • 1 గంట క్రితం • Hyderabad'},
+  {cat:'Vijayawada', title:'విజయవాడలో రోడ్ విస్తరణ పనులు వేగంగా', img:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800', src:'Sakshi • 5 గంటల క్రితం • Vijayawada'},
+  {cat:'Vijayawada', title:'విజయవాడ కనకదుర్గమ్మ గుడిలో భక్తుల రద్దీ', img:'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800', src:'APTS NEWS • 3 గంటల క్రితం • Vijayawada'},
+  {cat:'Vijayawada', title:'కృష్ణా నదిలో నీటి మట్టం పెరుగుదల - అధికారుల హెచ్చరిక', img:'https://images.unsplash.com/photo-1439066615861-d1af177d7c9c?w=800', src:'APTS NEWS • 4 గంటల క్రితం • Vijayawada'},
+  {cat:'Telangana', title:'తెలంగాణలో రైతులకు శుభవార్త - కొత్త పథకం ప్రకటన', img:'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800', src:'APTS NEWS • 2 గంటల క్రితం • Telangana'},
+  {cat:'Telangana', title:'తెలంగాణలో స్కూళ్లకు సెలవు ప్రకటన - పూర్తి వివరాలు', img:'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800', src:'APTS NEWS • 6 గంటల క్రితం • Telangana'},
+  {cat:'Telangana', title:'వరంగల్ లో కొత్త IT కంపెనీలు - యువతకు ఉద్యోగాలు', img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800', src:'APTS NEWS • 5 గంటల క్రితం • Warangal'},
+  {cat:'Andhra Pradesh', title:'ఆంధ్రప్రదేశ్ లో కొత్త రోడ్లు, అభివృద్ధి పనులు ప్రారంభం', img:'https://images.unsplash.com/photo-1465447142348-e9952c393450?w=800', src:'APTS NEWS • 2 గంటల క్రితం • AP'},
+  {cat:'Andhra Pradesh', title:'అమరావతిలో రాజధాని పనులు వేగవంతం', img:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800', src:'APTS NEWS • 4 గంటల క్రితం • Amaravati'},
+  {cat:'Andhra Pradesh', title:'AP లో వాతావరణం - రేపు వర్షం పడే అవకాశం', img:'https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=800', src:'APTS NEWS • 1 గంట క్రితం • AP'},
+];
+
+let currentCat = 'All';
+function renderNews(){
+  let list = currentCat==='All' ? allNews : allNews.filter(n=>n.cat===currentCat);
+  document.getElementById('countText').innerText = list.length + ' వార్తలు';
+  document.getElementById('newsList').innerHTML = list.map(n=>`
+    <div class="card">
+      <img src="${n.img}">
+      <div class="card-body">
+        <h3>${n.title}</h3>
+        <div class="source">Source: ${n.src}</div>
+        <button class="btn" onclick="alert('పూర్తి వార్త త్వరలో వస్తుంది')">పూర్తి వార్త చదవండి →</button>
+      </div>
+    </div>`).join('');
+}
+function filterNews(cat,btn){
+  currentCat=cat;
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderNews();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 function show(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
 }
+function joinDone(){
+  let name=document.getElementById('jName').value;
+  document.getElementById('joinMsg').innerText = 'ధన్యవాదాలు '+(name||'అండీ')+'! మీ వివరాలు Admin కి వెళ్ళాయి. వెరిఫై అయ్యాక మీకు కాల్ వస్తుంది.';
+  alert('Join విజయవంతం! Admin మీకు కాల్ చేస్తారు.');
+}
+renderNews();
+// Breaking news ఆటోమేటిక్ గా మారుతుంది
+let bNews = ['హైదరాబాద్ లో భారీ వర్షం - ట్రాఫిక్ అలర్ట్','విజయవాడలో రోడ్ పనులు - దారి మళ్లింపు','తెలంగాణలో రైతులకు శుభవార్త','AP లో రేపు వర్షం - జాగ్రత్త'];
+let bi=0;
+setInterval(()=>{ bi=(bi+1)%bNews.length; document.getElementById('breakingText').innerText=bNews[bi]; }, 8000);
 </script>
 </body>
 </html>
