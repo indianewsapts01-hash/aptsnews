@@ -3,168 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APTS NEWS - తెలంగాణ & AP న్యూస్</title>
+<title>APTS - సూపర్ యాప్</title>
 <meta name="theme-color" content="#d32f2f">
 <link rel="manifest" href="manifest.json">
-<meta name="mobile-web-app-capable" content="yes">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f5f5f5}
-.header{background:#d32f2f;color:#fff;padding:14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.header h1{font-size:21px}
-.installBtn{background:#fff;color:#d32f2f;border:none;padding:7px 12px;border-radius:20px;font-weight:bold;font-size:13px;cursor:pointer}
-.tabs{display:flex;gap:8px;padding:10px;overflow-x:auto;background:#fff;position:sticky;top:52px;z-index:9}
-.tabs button{padding:8px 14px;border:1px solid #d32f2f;background:#fff;color:#d32f2f;border-radius:20px;white-space:nowrap;cursor:pointer}
-.tabs button.active{background:#d32f2f;color:#fff}
-.breaking{background:#ffebee;border-left:4px solid #d32f2f;margin:10px;padding:12px;border-radius:6px}
-.card{background:#fff;margin:10px;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px #ccc}
-.card img{width:100%;height:180px;object-fit:cover}
-.card-body{padding:12px}
-.card-body h3{font-size:17px;margin-bottom:6px;line-height:1.4}
-.source{font-size:13px;color:#666;margin-bottom:8px}
-.btn{background:#d32f2f;color:#fff;border:none;padding:11px 16px;border-radius:8px;width:100%;cursor:pointer;font-size:15px}
-.page{display:none;padding-bottom:80px}
-.page.active{display:block}
+body{background:#f5f5f5;padding-bottom:85px}
+.header{background:#d32f2f;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:10}
+.header h1{font-size:22px}
+.header p{font-size:13px;opacity:.9}
+.search{margin:12px;background:#fff;padding:10px;border-radius:12px;display:flex;gap:8px}
+.search input{flex:1;border:none;outline:none;font-size:15px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 12px}
+.card{background:#fff;border-radius:14px;padding:16px;text-align:center;box-shadow:0 1px 5px #ddd;cursor:pointer}
+.card span{font-size:32px;display:block;margin-bottom:6px}
+.card b{font-size:15px;display:block}
+.card small{font-size:12px;color:#666}
+.big{grid-column:span 2;background:linear-gradient(135deg,#d32f2f,#ff7043);color:#fff}
+.big small{color:#fff;opacity:.9}
+.cricket{grid-column:span 2;background:linear-gradient(135deg,#1b5e20,#43a047);color:#fff}
+.cricket small{color:#fff;opacity:.9}
+.horo{grid-column:span 2;background:linear-gradient(135deg,#4a148c,#8e24aa);color:#fff}
+.horo small{color:#fff;opacity:.9}
+.movie{grid-column:span 2;background:linear-gradient(135deg,#0d47a1,#1976d2);color:#fff}
+.movie small{color:#fff;opacity:.9}
+.section{padding:12px}
+.section h3{margin:12px 4px}
+.box{background:#fff;margin:0 12px 12px;padding:14px;border-radius:12px}
+.btn{background:#d32f2f;color:#fff;border:none;padding:12px;border-radius:10px;width:100%;font-size:15px;margin-top:8px}
+.btn2{background:#fff;color:#d32f2f;border:1px solid #d32f2f;padding:10px;border-radius:10px;width:100%;font-size:14px;margin-top:6px}
+.input{width:100%;padding:12px;margin:6px 0;border:1px solid #ddd;border-radius:8px}
+.newsCard{background:#fff;margin:0 12px 10px;border-radius:12px;overflow:hidden;display:flex;gap:10px;padding:10px}
+.newsCard img{width:90px;height:90px;object-fit:cover;border-radius:10px}
+.newsCard h4{font-size:15px;line-height:1.4}
+.newsCard p{font-size:12px;color:#666;margin-top:4px}
+.rasiGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.rasiBtn{background:#f3e5f5;border:1px solid #ce93d8;padding:12px 4px;border-radius:10px;font-size:14px;cursor:pointer;text-align:center}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px;border-top:1px solid #ddd}
-.bottom button{border:none;background:none;font-size:15px;cursor:pointer}
+.bottom button{border:none;background:none;font-size:15px}
 .bottom button.active{color:#d32f2f;font-weight:bold}
-.input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;font-size:15px}
-.box{background:#fff;margin:10px;padding:16px;border-radius:12px}
-.small{font-size:13px;color:#666;line-height:1.5}
-.badge{background:#e8f5e9;color:#2e7d32;padding:3px 8px;border-radius:10px;font-size:12px}
-.refreshBtn{background:#fff;border:1px solid #d32f2f;color:#d32f2f;padding:6px 12px;border-radius:20px;font-size:13px;cursor:pointer}
+.page{display:none}
+.page.active{display:block}
 </style>
 </head>
 <body>
-<div class="header"><h1>APTS NEWS</h1><button class="installBtn" onclick="installApp()">📲 యాప్ Install</button></div>
+<div class="header"><h1>APTS - SUPER APP</h1><p>తెలంగాణ • ఆంధ్రప్రదేశ్ - అందరికీ ఒకే యాప్</p></div>
 
 <div id="home" class="page active">
-  <div class="tabs">
-    <button class="active" onclick="filterNews('All',this)">అన్నీ • All</button>
-    <button onclick="filterNews('Hyderabad',this)">Hyderabad</button>
-    <button onclick="filterNews('Vijayawada',this)">Vijayawada</button>
-    <button onclick="filterNews('Telangana',this)">Telangana</button>
-    <button onclick="filterNews('Andhra Pradesh',this)">Andhra Pradesh</button>
-  </div>
-  <div class="breaking"><b>⚡ BREAKING NEWS</b><br><span id="breakingText">తెలంగాణ & AP లైవ్ అప్డేట్స్</span></div>
-  <div style="padding:0 10px;display:flex;justify-content:space-between;align-items:center">
-    <span><span class="badge">● LIVE</span> <span class="small" id="countText"></span></span>
-    <button class="refreshBtn" onclick="loadLiveNews(true)">🔄 కొత్త వార్తలు</button>
-  </div>
-  <p class="small" style="padding:5px 10px" id="updateTime">వార్తలు లోడ్ అయ్యాయి ✅</p>
-  <div id="newsList"></div>
-  <div class="box" style="text-align:center"><h3>మీ ఊరి వార్త మీరే పంపండి</h3><p class="small">మీ చుట్టూ జరిగిన వార్త ఉంటే మాకు పంపండి.</p><br><button class="btn" onclick="show('join',document.querySelectorAll('.bottom button')[1])">📝 వార్త పంపండి / Join</button></div>
+<div class="search"><span>🔍</span><input id="searchBox" placeholder="ఏం కావాలి? ఉద్యోగం, బంగారం, సినిమా..." oninput="doSearch()"></div>
+
+<div class="grid">
+<div class="card big" onclick="openNews()"><span>📰</span><b>లైవ్ న్యూస్ - AP & TS</b><small>తాజా వార్తలు • <span id="newsCount">తాజా</span></small></div>
+
+<div class="card cricket" onclick="window.open('https://www.google.com/search?q=live+cricket+score+today&hl=te','_blank')"><span>🏏</span><b>క్రికెట్ లైవ్ స్కోర్</b><small>India • 【entity-IPL¦canonical_name=IPL】 • World Cup - లైవ్ స్కోర్ చూడండి</small></div>
+
+<div class="card horo" onclick="show('horoPage')"><span>🔮</span><b>నేటి రాశిఫలాలు</b><small>మీ రాశి నొక్కండి - ఈరోజు ఎలా ఉందో తెలుసుకోండి</small></div>
+
+<div class="card movie" onclick="show('moviePage')"><span>🎬</span><b>సినిమా టికెట్లు</b><small>Hyderabad • Vijayawada - కొత్త సినిమాలు, థియేటర్లు</small></div>
+
+<div class="card" onclick="window.open('https://www.google.com/search?q=government+jobs+telangana+andhra+pradesh+today&hl=te','_blank')"><span>💼</span><b>ఉద్యోగాలు</b><small>Govt + Private Jobs</small></div>
+<div class="card" onclick="window.open('https://www.google.com/search?q=weather+Hyderabad+today&hl=te','_blank')"><span>🌦️</span><b>వాతావరణం</b><small>మీ ఊరి వాతావరణం</small></div>
+<div class="card" onclick="window.open('https://www.google.com/search?q=gold+price+today+Hyderabad+Vijayawada&hl=te','_blank')"><span>🪙</span><b>బంగారం రేటు</b><small>నేటి ధర - 22K / 24K</small></div>
+<div class="card" onclick="window.open('https://www.google.com/search?q=APSRTC+TSRTC+bus+timings','_blank')"><span>🚌</span><b>బస్సు టైమింగ్స్</b><small>APSRTC / TSRTC</small></div>
+<div class="card" onclick="window.open('https://www.google.com/search?q=pnr+status+train+running+status','_blank')"><span>🚆</span><b>రైలు / PNR</b><small>Train Status</small></div>
+<div class="card" onclick="window.open('https://www.google.com/search?q=AP+Telangana+government+schemes+2026','_blank')"><span>🏛️</span><b>ప్రభుత్వ పథకాలు</b><small>రైతు భరోసా, పెన్షన్</small></div>
+<div class="card" onclick="show('emergency')"><span>🆘</span><b>ఎమర్జెన్సీ</b><small>108, 100, 112</small></div>
+<div class="card" onclick="show('join')"><span>📝</span><b>వార్త పంపండి</b><small>మీ ఊరి రిపోర్టర్ అవ్వండి</small></div>
+</div>
+
+<div class="section"><h3>🔥 ఇప్పటి ముఖ్య వార్తలు</h3></div>
+<div id="homeNews"></div>
+<button class="btn2" style="margin:0 12px;width:calc(100% - 24px)" onclick="openNews()">అన్ని వార్తలు చూడండి →</button>
+</div>
+
+<div id="horoPage" class="page">
+<div style="padding:12px"><button class="btn2" onclick="show('home')">← వెనక్కి</button><h3 style="margin-top:12px">🔮 నేటి రాశిఫలాలు - <span id="todayDate"></span></h3><p style="font-size:13px;color:#666">మీ రాశి మీద నొక్కండి</p></div>
+<div class="box"><div class="rasiGrid" id="rasiGrid"></div><div id="horoResult" style="margin-top:14px;background:#fafafa;padding:12px;border-radius:10px;display:none"><h4 id="horoTitle"></h4><p id="horoText" style="font-size:14px;line-height:1.6;margin-top:6px"></p><p style="font-size:13px;color:#666;margin-top:6px">⭐ అదృష్ట సంఖ్య: <span id="horoNum"></span> • 🎨 అదృష్ట రంగు: <span id="horoColor"></span></p></div><button class="btn" onclick="window.open('https://www.google.com/search?q=today+rasi+phalalu+telugu&hl=te','_blank')">Google లో పూర్తి రాశిఫలాలు చూడండి →</button></div>
+</div>
+
+<div id="moviePage" class="page">
+<div style="padding:12px"><button class="btn2" onclick="show('home')">← వెనక్కి</button><h3 style="margin-top:12px">🎬 సినిమా టికెట్లు</h3></div>
+<div class="box"><h4>📍 మీ సిటీ ఎంచుకోండి</h4><button class="btn" onclick="window.open('https://www.google.com/search?q=movies+in+Hyderabad+today+bookmyshow','_blank')">Hyderabad సినిమాలు</button><button class="btn" style="background:#1565c0" onclick="window.open('https://www.google.com/search?q=movies+in+Vijayawada+today+bookmyshow','_blank')">Vijayawada సినిమాలు</button><button class="btn" style="background:#6a1b9a" onclick="window.open('https://www.google.com/search?q=movies+in+Visakhapatnam+today','_blank')">Vizag సినిమాలు</button><button class="btn2" onclick="window.open('https://www.google.com/search?q=telugu+new+movies+today&hl=te','_blank')">🔥 కొత్త తెలుగు సినిమాలు చూడండి</button><p style="font-size:13px;color:#666;margin-top:10px">నొక్కితే డైరెక్ట్ 【entity-BookMyShow¦canonical_name=BookMyShow】 / Google లో థియేటర్లు, టైమింగ్స్, టికెట్ ధరలు వస్తాయి.</p></div>
+<div class="box"><h4>🎥 ఈ వారం ట్రెండింగ్</h4><p style="font-size:14px;line-height:1.8">• కొత్త తెలుగు సినిమాలు<br>• హిందీ డబ్బింగ్ సినిమాలు<br>• పిల్లల సినిమాలు<br>• థియేటర్ దగ్గరలో ఏది ఉందో చూడండి</p></div>
+</div>
+
+<div id="newsPage" class="page">
+<div style="padding:12px"><button class="btn2" onclick="show('home')">← వెనక్కి</button><h3 style="margin-top:12px">📰 AP & TS లైవ్ న్యూస్</h3><p style="font-size:13px;color:#666" id="updateTime">లోడ్ అవుతుంది...</p></div>
+<div id="newsList"></div>
+<div class="box"><button class="btn" onclick="window.open('https://news.google.com/search?q=Telangana+Andhra+Pradesh&hl=te&gl=IN&ceid=IN:te','_blank')">Google News లో అన్నీ చూడండి →</button></div>
 </div>
 
 <div id="join" class="page">
-  <div class="box"><h3>APTS NEWS లో చేరండి</h3><p class="small">మీ ఊరి రిపోర్టర్ అవ్వండి. ఉచితం.</p>
-    <input class="input" id="jName" placeholder="పూర్తి పేరు / Full Name">
-    <input class="input" id="jPhone" placeholder="ఫోన్ నంబర్">
-    <input class="input" id="jDist" placeholder="జిల్లా / District">
-    <input class="input" id="jNews" placeholder="మీ ఊరి వార్త ఇక్కడ రాయండి...">
-    <button class="btn" onclick="joinDone()">Join అవ్వండి - ఉచితం</button>
-    <p class="small" id="joinMsg" style="color:green;font-weight:bold;margin-top:10px"></p>
-  </div>
-  <div class="box"><h3>📲 యాప్ లాగా Install చేసుకోండి</h3><p class="small">Chrome లో పైన ⋮ > Add to Home Screen నొక్కండి.</p><br><button class="btn" onclick="installApp()">📲 ఇప్పుడే Install చేయండి</button></div>
+<div class="box"><h3>APTS లో చేరండి - ఉచితం</h3><input class="input" id="jName" placeholder="పేరు"><input class="input" id="jPhone" placeholder="ఫోన్ నంబర్"><input class="input" id="jDist" placeholder="జిల్లా / ఊరు"><input class="input" id="jNews" placeholder="మీ వార్త ఇక్కడ రాయండి..."><button class="btn" onclick="joinDone()">Join అవ్వండి</button><p id="joinMsg" style="color:green;font-weight:bold;margin-top:8px"></p></div>
 </div>
 
-<div class="bottom">
-  <button class="active" onclick="show('home',this)">🏠 హోమ్</button>
-  <button onclick="show('join',this)">📝 Join / వార్త పంపండి</button>
-  <button onclick="installApp()">📲 Install</button>
+<div id="emergency" class="page">
+<div class="box"><h3>🆘 ఎమర్జెన్సీ నంబర్లు</h3><p style="line-height:2;font-size:16px"><b>🚑 అంబులెన్స్:</b> 108<br><b>🚓 పోలీస్:</b> 100<br><b>🔥 ఫైర్:</b> 101<br><b>🆘 అన్నీ ఒకే నంబర్:</b> 112<br><b>👩 మహిళల హెల్ప్:</b> 181<br><b>👶 చైల్డ్ హెల్ప్:</b> 1098<br><b>⚡ కరెంట్:</b> 1912</p><button class="btn" onclick="show('home')">← హోమ్ కి వెళ్ళండి</button></div>
 </div>
+
+<div class="bottom"><button class="active" onclick="show('home',this)">🏠 హోమ్</button><button onclick="show('newsPage',this);loadNews()">📰 న్యూస్</button><button onclick="show('horoPage',this)">🔮 రాశి</button><button onclick="show('moviePage',this)">🎬 సినిమా</button></div>
 
 <script>
 let deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
-function installApp(){
-  if(deferredPrompt){deferredPrompt.prompt();}
-  else{alert('Install చేయడానికి:\nChrome లో పైన ⋮ మెనూ > Add to Home Screen / Install App నొక్కండి.');}
+function installApp(){ if(deferredPrompt) deferredPrompt.prompt(); else alert('Chrome లో ⋮ > Add to Home Screen నొక్కండి'); }
+function show(id,btn){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active'); window.scrollTo(0,0); }
+function joinDone(){ alert('ధన్యవాదాలు!'); document.getElementById('joinMsg').innerText='Join విజయవంతం ✅'; }
+function doSearch(){ let q=document.getElementById('searchBox').value; if(q.length>2){ window.open('https://www.google.com/search?q='+encodeURIComponent(q+' Telangana Andhra Pradesh')+'&hl=te','_blank'); } }
+function openNews(){ show('newsPage',document.querySelectorAll('.bottom button')[1]); loadNews(); }
+document.getElementById('todayDate').innerText=new Date().toLocaleDateString('te-IN');
+
+// రాశిఫలాలు
+const rasis=[['మేషం','♈'],['వృషభం','♉'],['మిథునం','♊'],['కర్కాటకం','♋'],['సింహం','♌'],['కన్య','♍'],['తుల','♎'],['వృశ్చికం','♏'],['ధనస్సు','♐'],['మకరం','♑'],['కుంభం','♒'],['మీనం','♓']];
+const horoTexts=['ఈరోజు మీకు మంచి రోజు. కొత్త పనులు మొదలుపెట్టడానికి అనుకూలం. కుటుంబంలో సంతోషం ఉంటుంది. ఖర్చులు కొంచెం తగ్గించుకోండి.','ఉద్యోగంలో మంచి గుర్తింపు వస్తుంది. డబ్బు విషయంలో జాగ్రత్తగా ఉండండి. స్నేహితుల నుండి సహాయం అందుతుంది.','ఆరోగ్యం బాగుంటుంది. చదువు, ఉద్యోగంలో పురోగతి ఉంటుంది. ప్రయాణం చేసే అవకాశం ఉంది.','ఇంట్లో శుభవార్త వింటారు. పిల్లల చదువులో మంచి ఫలితం. పెద్దల ఆశీర్వాదం లభిస్తుంది.','ధైర్యంగా నిర్ణయం తీసుకోండి, విజయం మీదే. వ్యాపారంలో లాభం ఉంటుంది.','పని ఒత్తిడి తగ్గుతుంది. కొత్త స్నేహితులు పరిచయం అవుతారు. డబ్బు ఆదా అవుతుంది.','ప్రేమ, పెళ్లి విషయాల్లో శుభవార్త. కుటుంబంతో సంతోషంగా గడుపుతారు.','ఆర్థికంగా మంచి రోజు. పాత బాకీలు వసూలవుతాయి. ఆరోగ్యం జాగ్రత్త.','దేవుడి దర్శనం చేసుకోండి, మనశ్శాంతి లభిస్తుంది. ఉద్యోగంలో మార్పు ఉంటుంది.','కష్టానికి తగ్గ ఫలితం వస్తుంది. ఉన్నతాధికారుల మెప్పు పొందుతారు.','కొత్త ఆలోచనలు వస్తాయి. స్నేహితులతో సరదాగా గడుపుతారు.','మనసులో ఉన్న కోరిక నెరవేరుతుంది. డబ్బు, కీర్తి పెరుగుతాయి.'];
+const colors=['ఎరుపు','ఆకుపచ్చ','పసుపు','తెలుపు','నారింజ','నీలం','గులాబీ','ఊదా','ఆకుపచ్చ','నీలం','తెలుపు','పసుపు'];
+document.getElementById('rasiGrid').innerHTML=rasis.map((r,i)=>`<div class="rasiBtn" onclick="showHoro(${i})">${r[1]}<br>${r[0]}</div>`).join('');
+function showHoro(i){ document.getElementById('horoResult').style.display='block'; document.getElementById('horoTitle').innerText=rasis[i][1]+' '+rasis[i][0]+' - నేటి ఫలం'; document.getElementById('horoText').innerText=horoTexts[i]; document.getElementById('horoNum').innerText=(i+1)*2+1; document.getElementById('horoColor').innerText=colors[i]; document.getElementById('horoResult').scrollIntoView({behavior:'smooth'}); }
+
+const imgs=['https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400','https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400','https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=400','https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400'];
+let fallback=[{title:'హైదరాబాద్, విజయవాడలో నేటి వాతావరణం, ట్రాఫిక్ అప్డేట్స్',cat:'Hyderabad',time:'ఇప్పుడే'},{title:'తెలంగాణ, AP లో కొత్త ఉద్యోగాలు, ప్రభుత్వ పథకాలు',cat:'Telangana',time:'ఇప్పుడే'},{title:'AP, తెలంగాణలో బంగారం ధరలు - నేటి రేట్లు',cat:'Andhra Pradesh',time:'ఇప్పుడే'},{title:'అమరావతి, హైదరాబాద్ అభివృద్ధి పనులు వేగవంతం',cat:'Andhra Pradesh',time:'ఇప్పుడే'}];
+function render(list){
+ document.getElementById('newsCount').innerText=list.length+' వార్తలు';
+ document.getElementById('homeNews').innerHTML=list.slice(0,4).map((n,i)=>`<div class="newsCard" onclick="window.open('https://news.google.com/search?q='+encodeURIComponent(n.title)+'&hl=te&gl=IN&ceid=IN:te','_blank')"><img src="${imgs[i%4]}"><div><h4>${n.title}</h4><p>${n.cat} • ${n.time} • నొక్కి చదవండి →</p></div></div>`).join('');
+ document.getElementById('newsList').innerHTML=list.map((n,i)=>`<div class="newsCard" onclick="window.open('https://news.google.com/search?q='+encodeURIComponent(n.title)+'&hl=te&gl=IN&ceid=IN:te','_blank')"><img src="${imgs[i%4]}"><div><h4>${n.title}</h4><p>${n.cat} • ${n.time}</p><b style="color:#d32f2f;font-size:13px">పూర్తి వార్త చదవండి →</b></div></div>`).join('');
 }
-function show(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
+async function loadNews(){
+ document.getElementById('updateTime').innerText='కొత్త వార్తలు తెస్తున్నాం...';
+ try{
+  let rss='https://news.google.com/rss/search?q='+encodeURIComponent('Telangana OR Andhra Pradesh OR Hyderabad')+'&hl=te&gl=IN&ceid=IN:te';
+  let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss)+'&_t='+Date.now());
+  let d=await r.json();
+  if(d.items && d.items.length>2){ let list=d.items.slice(0,12).map(it=>({title:it.title.split(' - ').slice(0,-1).join(' - ')||it.title, cat:'AP & TS', time:it.pubDate?new Date(it.pubDate).toLocaleTimeString('te-IN'):'ఇప్పుడే'})); render(list); document.getElementById('updateTime').innerText='చివరిగా అప్డేట్: '+new Date().toLocaleTimeString('te-IN')+' ✅'; return; }
+ }catch(e){}
+ render(fallback); document.getElementById('updateTime').innerText='వార్త మీద నొక్కండి - Google News ఓపెన్ అవుతుంది ✅';
 }
-function joinDone(){ let n=document.getElementById('jName').value; document.getElementById('joinMsg').innerText='ధన్యవాదాలు '+(n||'అండీ')+'!'; alert('Join విజయవంతం!'); }
-
-const imgs=['https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800','https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800','https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800','https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800','https://images.unsplash.com/photo-1439066615861-d1af177d7c9c?w=800','https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800'];
-
-let liveNews=[
- {title:'హైదరాబాద్ లో నేడు వాతావరణం - పలు ప్రాంతాల్లో తేలికపాటి వర్షం',link:'https://news.google.com/search?q=Hyderabad%20weather&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[0],cat:'Hyderabad'},
- {title:'విజయవాడలో ట్రాఫిక్, రోడ్ పనులు - ప్రయాణికులకు సూచన',link:'https://news.google.com/search?q=Vijayawada&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[1],cat:'Vijayawada'},
- {title:'తెలంగాణలో రైతులకు, విద్యార్థులకు కొత్త అప్డేట్స్',link:'https://news.google.com/search?q=Telangana&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[2],cat:'Telangana'},
- {title:'ఆంధ్రప్రదేశ్ లో అభివృద్ధి పనులు, వాతావరణ అప్డేట్',link:'https://news.google.com/search?q=Andhra%20Pradesh&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[3],cat:'Andhra Pradesh'},
- {title:'హైదరాబాద్ మెట్రో, బస్సు సర్వీసుల్లో మార్పులు',link:'https://news.google.com/search?q=Hyderabad%20Metro&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[4],cat:'Hyderabad'},
- {title:'AP, తెలంగాణలో బంగారం, వెండి ధరలు - నేటి రేట్లు',link:'https://news.google.com/search?q=gold%20price%20Hyderabad&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[5],cat:'Telangana'},
- {title:'విజయవాడ కనకదుర్గమ్మ గుడిలో భక్తుల రద్దీ',link:'https://news.google.com/search?q=Vijayawada%20Kanaka%20Durga&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[1],cat:'Vijayawada'},
- {title:'అమరావతిలో రాజధాని పనులు వేగవంతం',link:'https://news.google.com/search?q=Amaravati&hl=te&gl=IN&ceid=IN:te',src:'Google News • ఇప్పుడే',img:imgs[3],cat:'Andhra Pradesh'},
-];
-let currentCat='All';
-function getCat(t){ t=t.toLowerCase(); if(t.includes('hyderabad')||t.includes('హైదరాబాద్')) return 'Hyderabad'; if(t.includes('vijayawada')||t.includes('విజయవాడ')) return 'Vijayawada'; if(t.includes('andhra')||t.includes('ఆంధ్ర')||t.includes('amaravati')||t.includes('guntur')||t.includes('visakhapatnam')) return 'Andhra Pradesh'; return 'Telangana'; }
-function timeAgo(d){ try{ let diff=(Date.now()-new Date(d).getTime())/1000/60; if(diff<60) return Math.max(1,Math.round(diff))+' నిమిషాల క్రితం'; if(diff<1440) return Math.round(diff/60)+' గంటల క్రితం'; return Math.round(diff/1440)+' రోజుల క్రితం'; }catch(e){ return 'ఇప్పుడే'; } }
-
-function renderNews(){
-  let list = currentCat==='All' ? liveNews : liveNews.filter(n=>n.cat===currentCat);
-  if(list.length===0) list=liveNews;
-  document.getElementById('countText').innerText=list.length+' వార్తలు';
-  document.getElementById('breakingText').innerText=list[0].title;
-  document.getElementById('newsList').innerHTML=list.map(n=>`<div class="card"><img src="${n.img}" onerror="this.src='${imgs[0]}'"><div class="card-body"><h3>${n.title}</h3><div class="source">Source: ${n.src} • ${n.cat}</div><button class="btn" onclick="window.open('${n.link}','_blank')">పూర్తి వార్త చదవండి →</button></div></div>`).join('');
-}
-function filterNews(cat,btn){
-  currentCat=cat;
-  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderNews();
-  loadLiveNews(false);
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-// ✅ కొత్త ఫిక్స్ - పాత క్యాష్ రాకుండా ప్రతిసారి కొత్త లింక్ + 2 సర్వర్లు
-async function loadLiveNews(isRefresh){
-  if(isRefresh) document.getElementById('updateTime').innerText='కొత్త వార్తల కోసం చూస్తున్నాం...';
-  let q = currentCat==='All' ? 'Telangana OR Andhra Pradesh OR Hyderabad OR Vijayawada' : currentCat;
-  let rss='https://news.google.com/rss/search?q='+encodeURIComponent(q)+'&hl=te&gl=IN&ceid=IN:te';
-  let bust = '&_t=' + Date.now() + '&_r=' + Math.random();
-
-  // 1 - rss2json (క్యాష్ లేకుండా)
-  try{
-    let c1=new AbortController(); setTimeout(()=>c1.abort(), 7000);
-    let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss)+bust,{signal:c1.signal, cache:'no-store'});
-    let d=await r.json();
-    if(d && d.items && d.items.length>2){
-      liveNews=d.items.slice(0,15).map((it,i)=>({title:it.title.split(' - ').slice(0,-1).join(' - ')||it.title, link:it.link, src:(it.author||'Google News')+' • '+timeAgo(it.pubDate), img:imgs[i%imgs.length], cat:getCat(it.title)}));
-      document.getElementById('updateTime').innerText='చివరిగా అప్డేట్: '+new Date().toLocaleTimeString('te-IN')+' - కొత్త లైవ్ వార్తలు ✅';
-      renderNews(); return;
-    }
-  }catch(e){}
-
-  // 2 - allorigins నేరుగా (ఎప్పుడూ ఫ్రెష్)
-  try{
-    let c2=new AbortController(); setTimeout(()=>c2.abort(), 7000);
-    let r2=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(rss+bust),{signal:c2.signal, cache:'no-store'});
-    let txt=await r2.text();
-    let doc=new DOMParser().parseFromString(txt,'text/xml');
-    let items=[...doc.querySelectorAll('item')].slice(0,15);
-    if(items.length>2){
-      liveNews=items.map((it,i)=>{
-        let title=it.querySelector('title')?.textContent||'';
-        let link=it.querySelector('link')?.textContent||'#';
-        let pub=it.querySelector('pubDate')?.textContent||'';
-        return {title:title.split(' - ').slice(0,-1).join(' - ')||title, link, src:'Google News • '+timeAgo(pub), img:imgs[i%imgs.length], cat:getCat(title)};
-      });
-      document.getElementById('updateTime').innerText='చివరిగా అప్డేట్: '+new Date().toLocaleTimeString('te-IN')+' - కొత్త లైవ్ వార్తలు ✅';
-      renderNews(); return;
-    }
-  }catch(e){}
-
-  if(isRefresh) document.getElementById('updateTime').innerText='లైవ్ సర్వర్ బిజీగా ఉంది, కొంచెం ఆగి మళ్ళీ Refresh నొక్కండి.';
-}
-renderNews();
-loadLiveNews(false);
-setInterval(()=>{loadLiveNews(false);},180000);
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+render(fallback); loadNews();
 </script>
 </body>
-</html>
+  </html>
