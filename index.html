@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APTS NEWS - తెలంగాణ & AP న్యూస్</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f5f5f5}
+.header{background:#d32f2f;color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:20px}
+.tabs{display:flex;gap:8px;padding:10px;overflow-x:auto;background:#fff}
+.tabs button{padding:8px 14px;border:1px solid #d32f2f;background:#fff;color:#d32f2f;border-radius:20px;white-space:nowrap;cursor:pointer}
+.tabs button.active{background:#d32f2f;color:#fff}
+.breaking{background:#ffebee;border-left:4px solid #d32f2f;margin:10px;padding:12px}
+.card{background:#fff;margin:10px;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px #ccc}
+.card img{width:100%;height:180px;object-fit:cover}
+.card-body{padding:12px}
+.card-body h3{font-size:17px;margin-bottom:6px}
+.source{font-size:13px;color:#666;margin-bottom:8px}
+.btn{background:#d32f2f;color:#fff;border:none;padding:10px 16px;border-radius:6px;width:100%;cursor:pointer}
+.page{display:none;padding-bottom:70px}
+.page.active{display:block}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px;border-top:1px solid #ddd}
+.bottom button{border:none;background:none;font-size:14px;cursor:pointer}
+.bottom button.active{color:#d32f2f;font-weight:bold}
+.input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
+.box{background:#fff;margin:10px;padding:15px;border-radius:10px}
+.earn{display:flex;gap:10px}
+.earn div{flex:1;background:#fff3e0;padding:12px;border-radius:8px;text-align:center}
+.lock{background:#fff3cd;padding:12px;margin:10px;border-radius:8px;font-size:13px}
+</style>
+</head>
+<body>
 
+<div class="header"><h1>APTS NEWS</h1><span>🔔 👤</span></div>
+
+<!-- PAGE 1 : HOME -->
+<div id="home" class="page active">
+  <div class="tabs">
+    <button class="active">Hyderabad</button><button>Vijayawada</button><button>Telangana</button><button>Andhra Pradesh</button>
+  </div>
+  <div class="breaking"><b>⚡ BREAKING NEWS</b><br>హైదరాబాద్ లో భారీ వర్షం - ట్రాఫిక్ అలర్ట్</div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800">
+    <div class="card-body">
+      <h3>హైదరాబాద్ లో కొత్త మెట్రో లైన్ ప్రారంభం</h3>
+      <div class="source">Source: 【entity-Eenadu¦canonical_name=Eenadu】 • 2 గంటల క్రితం • Kukatpally నుంచి - రామ్ కుమార్</div>
+      <button class="btn" onclick="alert('ఇక్కడ ఒరిజినల్ సైట్ లింక్ వస్తుంది')">పూర్తి వార్త చదవండి → Read Full News</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800">
+    <div class="card-body">
+      <h3>విజయవాడలో రోడ్ విస్తరణ పనులు వేగంగా</h3>
+      <div class="source">Source: Sakshi • 5 గంటల క్రితం • Vijayawada నుంచి - సురేష్</div>
+      <button class="btn" onclick="alert('ఇక్కడ ఒరిజినల్ సైట్ లింక్ వస్తుంది')">పూర్తి వార్త చదవండి → Read Full News</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2 : EARNINGS - LOCKED -->
+<div id="earn" class="page">
+  <div class="box"><h3>జర్నలిస్ట్ ఎర్నింగ్స్</h3><p style="font-size:13px;color:#666">ఇది కేవలం జర్నలిస్ట్ కి, Admin కి మాత్రమే కనిపిస్తుంది</p></div>
+  <div class="lock">🔒 మీరు లాగిన్ అయితేనే మీ ఎర్నింగ్స్ కనిపిస్తాయి. వేరే వాళ్ళకి కనిపించవు.</div>
+  <div class="box"><b>Total Views:</b> 12,500 👁️</div>
+  <div class="earn">
+    <div><small>Total Earnings</small><h2>₹450</h2></div>
+    <div style="background:#e8f5e9"><small>మీ వాటా 30%</small><h2 style="color:green">₹135</h2></div>
+  </div>
+  <div class="box"><b>యాప్ వాటా 70%:</b> ₹315<br><small>Withdraw Min: ₹500 - ఇంకా ₹365 కావాలి</small><br><br><button class="btn">Withdraw - Min ₹500</button></div>
+</div>
+
+<!-- PAGE 3 : JOIN -->
+<div id="join" class="page">
+  <div class="box"><h3>జర్నలిస్ట్ గా చేరండి - Join</h3><p>Admin Verified తర్వాతనే Active అవుతారు</p>
+    <input class="input" placeholder="పూర్తి పేరు / Full Name">
+    <input class="input" placeholder="ఫోన్ నంబర్ + OTP">
+    <input class="input" placeholder="జిల్లా / District - Hyderabad">
+    <input class="input" placeholder="మండలం / Mandal - Kukatpally">
+    <input class="input" placeholder="పిన్ కోడ్ / Pincode - 500072">
+    <input class="input" placeholder="ఆధార్ ID ఫోటో అప్లోడ్">
+    <input class="input" placeholder="సెల్ఫీ ఫోటో అప్లోడ్">
+    <button class="btn">₹100 చెల్లించి Join అవ్వండి - Pay via UPI</button>
+    <p style="font-size:12px;margin-top:10px;color:#666">✓ మీ డీటెయిల్స్ కేవలం Admin కి మాత్రమే కనిపిస్తాయి. పబ్లిక్ కి కనిపించవు.</p>
+  </div>
+</div>
+
+<div class="bottom">
+  <button class="active" onclick="show('home',this)">🏠 హోమ్</button>
+  <button onclick="show('earn',this)">💰 ఎర్నింగ్స్</button>
+  <button onclick="show('join',this)">📝 Join</button>
+</div>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
